@@ -38,6 +38,20 @@ export default {
   },
   beforeCreate() {
     document.body.className = "body-bg-image";
+  },
+  methods: {
+    onSubmit() {
+      if (!this.gamertag) {
+        this.$toasted.error("Please enter a gamertag", {
+          position: "bottom-center",
+          duration: 3000,
+          keepOnHover: true,
+          icon: "exclamation-circle"
+        });
+      } else {
+        this.$router.push(`/profile/${this.platform}/${this.gamertag}`);
+      }
+    }
   }
 };
 </script>
