@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/jC3vaza.png" align="right" />
+<img src="https://i.imgur.com/jC3vaza.png?1" align="right" />
 
 # Games-Tracker
 
