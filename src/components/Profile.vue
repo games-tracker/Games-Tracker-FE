@@ -1,9 +1,23 @@
-<template></template>
+<template>
+  <div>Profile</div>
+</template>
 
 <script>
 import axios from "axios";
 
-export default {};
+export default {
+  name: "Profile",
+  data() {
+    return {
+      loading: false,
+      error: null,
+      profileData: null
+    };
+  },
+  beforeCreate() {
+    document.body.className = "body-bg-no-image";
+  }
+};
 </script>
 
 <style scoped>
