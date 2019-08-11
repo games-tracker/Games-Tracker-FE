@@ -1,5 +1,61 @@
 <template>
-  <div>Profile</div>
+  <section>
+    <div v-if="loading">
+      <h3>Loading...</h3>
+    </div>
+    <div v-if="error">
+      <h1>{{error}}</h1>
+      <router-link to="/">Go Back</router-link>
+    </div>
+
+    <div v-if="profileData" class="container">
+      <h1 class="gamertag">
+        <img :src="profileData.platformInfo.avatarUrl" alt="Profile Image" class="platform-avatar" />
+        {{profileData.platformInfo.platformUserId}}
+      </h1>
+      <div class="grid">
+        <div>
+          <img :src="profileData.segments[1].metadata.imageUrl" alt="Legend Image" />
+        </div>
+        <div>
+          <ul>
+            <li>
+              <h4>Selected Legend</h4>
+              <p>{{profileData.metadata.activeLegendName}}</p>
+            </li>
+            <li v-if="profileData.segments[0].stats.season2Wins">
+              <h4>Season 2 Wins</h4>
+              <p>
+                {{profileData.segments[0].stats.season2Wins.displayValue}}
+                <span>({{profileData.segments[0].stats.season2Wins.percentile}})</span>
+              </p>
+            </li>
+            <li v-if="profileData.segments[0].stats.level">
+              <h4>Apex Level</h4>
+              <p>
+                {{profileData.segments[0].stats.level.displayValue}}
+                <span>({{profileData.segments[0].stats.level.percentile}}%)</span>
+              </p>
+            </li>
+            <li v-if="profileData.segments[0].stats.kills">
+              <h4>Lifetime Kills</h4>
+              <p>
+                {{profileData.segments[0].stats.kills.displayValue}}
+                <span>({{profileData.segments[0].stats.kills.percentile}}%)</span>
+              </p>
+            </li>
+            <li v-if="profileData.segments[0].stats.damage">
+              <h4>Damage Done</h4>
+              <p>
+                {{profileData.segments[0].stats.damage.displayValue}}
+                <span>({{profileData.segments[0].stats.damage.percentile}}%)</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -20,7 +76,7 @@ export default {
   async created() {
     this.loading = true;
     try {
-      const response = await axios.get(
+      const res = await axios.get(
         `https://games-trackers.herokuapp.com/api/v1/profile/${this.$route.params.platform}/${this.$route.params.gamertag}`
       );
 
@@ -29,7 +85,7 @@ export default {
       this.loading = false;
     } catch (err) {
       this.loading = false;
-      this.error = err.response.data.message;
+      this.error = err.res.data.message;
     }
   }
 };
