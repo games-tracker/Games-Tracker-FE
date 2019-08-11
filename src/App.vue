@@ -14,6 +14,23 @@ export default {
     Header
   }
 };
+
+// Random Images
+const images = [
+  "./assets/octane.png",
+  "./assets/bangalore.png",
+  "./assets/bloodhound.png",
+  "./assets/caustic.png",
+  "./assets/characters.png",
+  "./assets/gibraltar.png",
+  "./assets/lifeline.png",
+  "./assets/mirage.png",
+  "./assets/pathfinder.png",
+  "./assets/wraith.png"
+];
+const selectedImg = Math.floor(Math.random() * images.length);
+const img = images[selectedImg];
+console.log(img);
 </script>
 
 <style>

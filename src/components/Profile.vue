@@ -3,6 +3,7 @@
     <div v-if="loading">
       <h3>Loading...</h3>
     </div>
+
     <div v-if="error">
       <h1>{{error}}</h1>
       <router-link to="/">Go Back</router-link>
@@ -54,6 +55,7 @@
           </ul>
         </div>
       </div>
+      <router-link to="/">Go Back</router-link>
     </div>
   </section>
 </template>
@@ -85,7 +87,7 @@ export default {
       this.loading = false;
     } catch (err) {
       this.loading = false;
-      this.error = err.res.data.message;
+      this.error = err.response.data.message;
     }
   }
 };
